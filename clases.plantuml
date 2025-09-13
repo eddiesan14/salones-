@@ -1,0 +1,46 @@
+@startuml clasesSalones
+
+class Usuario {
+    - id:int
+    - nombre: string
+    - correoCorporativo: string
+    + iniciarSesion(): boolean
+}
+
+class Estudiante {
+    + realizarPedido(salon:Salon, items: list<Salon_estudio>,): Reserva
+}
+
+class Docente {
+    + realizarPedido(salon:Salon, items: list<Salon_estudio>, laboratorio:Laboratorio): Reserva
+}
+
+class Salon_estudio{
+    - id: int
+    - nombre: string
+    - disponibilidad (): boolean 
+    - tiempo: int
+    
+}
+
+class Laboratorio{
+    - id: int
+    - nombre: string
+    - disponibilidad (): boolean 
+    - tiempo: int
+}
+
+
+class Notificacion{
+    - id: int
+    - mensaje: String
+    - fechaEnvio: Date
+    + enviar(usuario:Usuario): void
+}
+
+Usuario <|-- Estudiante
+Usuario <|-- Docente
+
+
+
+@enduml

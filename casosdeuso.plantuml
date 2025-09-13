@@ -1,0 +1,27 @@
+@startuml casosUsoSalones
+left to right direction
+
+actor "Estudiante" as est
+actor "docentes" as doc
+
+rectangle "Sistema de Reserva de Salones"{
+    usercase "iniciar sesion" as UC1
+    usercase "reservar salon de estudio" as UC2
+    usercase "reservar laboratorio" as UC3
+    usercase "cancelar reserva" as UC4
+    usercase "listar reservas" as UC5
+}
+
+est --> UC1
+est --> UC2
+est --> UC4
+est --> UC5
+
+doc <-- UC1
+doc <-- UC2
+doc <-- UC3
+doc <-- UC4
+doc <-- UC5
+
+ 
+@enduml
