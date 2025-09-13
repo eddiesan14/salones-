@@ -1,46 +1,68 @@
-@startuml clasesSalones
-
+@startuml ClaseSalon
 class Usuario {
-    - id:int
-    - nombre: string
-    - correoCorporativo: string
-    + iniciarSesion(): boolean
+  - id: int
+  - nombre: String
+  - correo: String
+  - rol: String
+  + iniciarSesion()
+  + cerrarSesion()
 }
 
 class Estudiante {
-    + realizarPedido(salon:Salon, items: list<Salon_estudio>,): Reserva
-}
-
-class Docente {
-    + realizarPedido(salon:Salon, items: list<Salon_estudio>, laboratorio:Laboratorio): Reserva
-}
-
-class Salon_estudio{
     - id: int
-    - nombre: string
-    - disponibilidad (): boolean 
-    - tiempo: int
-    
+    - nombre: String
+    - correo: String
 }
 
-class Laboratorio{
-    - id: int
-    - nombre: string
-    - disponibilidad (): boolean 
-    - tiempo: int
+class Docente {  
+  - id: int
+  - nombre: String
+  - correo: String
+}
+class Administrador {
+  + gestionarPermisos()
 }
 
+class Salon {
+  - id: int
+  - nombre: String
+  - capacidad: int
+  - recursos: String
+  + verificarDisponibilidad()
+}
 
-class Notificacion{
-    - id: int
-    - mensaje: String
-    - fechaEnvio: Date
-    + enviar(usuario:Usuario): void
+class Reserva {
+  - id: int
+  - fecha: Date
+  - horaInicio: Time
+  - horaFin: Time
+  - estado: String
+  + confirmar()
+  + cancelar()
+}
+
+class CalendarioAcademico {
+  - id: int
+  - tipoEvento: String
+  - fecha: Date
+  + consultarEventos()
+}
+
+class Notificacion {
+  - id: int
+  - mensaje: String
+  - fechaEnvio: Date
+  + enviar()
 }
 
 Usuario <|-- Estudiante
 Usuario <|-- Docente
+Usuario <|-- Administrador
 
+Usuario "1" --> "0..*" Reserva
+Reserva "1" --> "1" Salon
+Reserva "1" --> "0..*" Notificacion
 
+CalendarioAcademico "1" --> "0..*" Reserva
 
 @enduml

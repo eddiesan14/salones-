@@ -1,27 +1,31 @@
-@startuml casosUsoSalones
+@startuml CasosdeUsoSalon
 left to right direction
+actor "Estudiante" as Estudiante
+actor "Docente" as Docente
+actor "Administrador" as Admin
+actor "Sistema Académico" as Sistema
 
-actor "Estudiante" as est
-actor "docentes" as doc
-
-rectangle "Sistema de Reserva de Salones"{
-    usercase "iniciar sesion" as UC1
-    usercase "reservar salon de estudio" as UC2
-    usercase "reservar laboratorio" as UC3
-    usercase "cancelar reserva" as UC4
-    usercase "listar reservas" as UC5
+rectangle "Sistema de Reserva de Salones" {
+  
+  usecase "Visualizar disponibilidad\nde salones" as UC1
+  usecase "Realizar reserva automática\n(con confirmación inmediata)" as UC2
+  usecase "Notificar conflictos de horario\no cancelaciones" as UC3
+  usecase "Gestionar permisos de reserva" as UC4
+  usecase "Integrar con calendario académico\n(exámenes, feriados)" as UC5
 }
 
-est --> UC1
-est --> UC2
-est --> UC4
-est --> UC5
+Estudiante --> UC1
+Estudiante --> UC2
+Docente --> UC1
+Docente --> UC2
+Docente --> UC3
+Docente --> UC4
 
-doc <-- UC1
-doc <-- UC2
-doc <-- UC3
-doc <-- UC4
-doc <-- UC5
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
 
- 
+Sistema --> UC5
 @enduml
